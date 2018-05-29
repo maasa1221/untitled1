@@ -1,0 +1,27 @@
+<% @page_title = "トピック" %>
+<h1><%= @page_title %></h1>
+<p><%= link_to"新規トピック", :new_topic %></p>
+<% if @topics.present? %>
+<table class="list">
+  <tr>
+    <th>title</th>
+    <th>column</th>
+    <th>day</th>
+    <th>imgname</th>
+    <th>action</th>
+  </tr>
+  <% @topics.each do |topic| %>
+  <tr>
+    <td><%= topic.title %></td>
+    <td><%= topic.column %></td>
+    <td><%= topic.day %></td>
+    <td><%= topic.imgname %></td>
+    <td><%= link_to"編集", [:edit,topic] %> | <%= link_to"削除", topic, method: :delete, data: { confirm: "本当に削除しますか"} %></td>
+
+  </tr>
+    <% end %>
+</table>
+<% else %>
+<p>コラムはありません</p>
+<% end %>
+

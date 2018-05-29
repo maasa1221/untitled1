@@ -1,0 +1,18 @@
+<table class="attr">
+    <tr>
+      <th><%= form.label :title, "タイトル" %></th>
+      <td><%= form.text_field :title, size: 50 %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :column, "内容" %></th>
+      <td><%= form.text_field :column, size: 400 %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :imgname, "画像" %></th>
+      <td><%= form.text_field :imgname  %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :day, "" %></th>
+      <td><%= form.date_select :day, start_year: 2018, end_year: Time.now.year, use_month_numbers: true %></td>
+    </tr>
+</table>

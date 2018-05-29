@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <title>慶應義塾大学海洋研究会マリンヨットクラブ</title>
+
+</head>
+<body id="top">
+<div id="page">
+  <header>
+    <div id="logo">
+    <%= link_to(image_tag("mark3.png", size: "300x70"), "") %><!--ロゴ-->
+    </div>
+    <div id="menu2">
+      <nav>
+        <ul>
+          <li><%= link_to(image_tag("home.jpg", size: "30x30"), "#top") %></li>
+          <li><%= link_to(image_tag("aboout.jpg", size: "30x30"), "#abouts") %></li>
+          <li><%= link_to(image_tag("nsw.jpg", size: "30x30"), "#log") %></li>
+          <li><%= link_to(image_tag("acc.png", size: "30x30"), "#activitys") %></li>
+          <li><%= link_to(image_tag("sns.jpg", size: "30x30"), "#sns") %></li><br>
+        </ul>
+      </nav>
+    </div>
+
+    <div >
+    <div id="menu"><!--メニュー-->
+      <nav id="menu1">
+        <ul>
+          <li><a href="#top">HOME</a><!--snsへのリンク--></li>
+          <li><a href="#abouts">ABOUT</a><!--accessへのリンク--></li>
+          <li><a href="#log">LOG</a><!--活動日誌へのリンク--></li>
+          <li><a href="#activitys">ACTIVITY</a><!--活動日誌へのリンク--></li>
+          <li><a href="#sns">SNS</a><!--クラブの説明へのリンク--></li>
+        </ul>
+      </nav>
+    </div>
+    </div>
+
+ </header>
+
+  <div id="container"><!--スライドショー-->
+    <div id="theTarget">
+      <%= image_tag("test1.jpg") %>
+      <%= image_tag("test2.jpg") %>
+      <%= image_tag("test3.jpg") %>
+      <%= image_tag("test4.jpg") %>
+      <%= image_tag("test5.jpg") %>
+    </div>
+  </div>
+
+  <section id="about">
+    <h2 id="abouts"></h2><!--概要置き場-->
+    <p id="about1"><strong> ––––『親しき仲にも礼儀あり、勇気無き者は去れ、潮っ気のある人間になれ』––––</strong></p>
+    <p>創部1951年___</br>
+    慶應義塾大学文化団体連盟に籍をおく公認学生マリンスポーツ団体です。</br>
+    ヨット、ウインドサーフィン、スタンドアップパドルの3種目をメインに</br>
+    活動を行なっており、キャンパスの垣根を超えて毎週江ノ島で練習しております。</br>
+    設立当初は『海』の学問たる海商法を研究する団体でしたが、 長い歴史の中で、</br>
+    徐々にその関わり方も変化していき、 現在ではヨットとウインドサーフィン、</br>
+    スタンドアップパドルを中心に、『海』に関わる活動を行っています。</p>
+  </section>
+
+
+<section id="topic">
+  <p id="log">––––　<%= link_to(image_tag("nsw.jpg", size: "90x90"), "") %>　––––</p>
+
+
+  <div class="swiper-container">
+
+    <div class="swiper-wrapper">
+     <% if @topics.present? %>
+        <% @topics.each do |topic| %>
+          <% @imgname = topic.imgname %>
+
+            <div class="swiper-slide">
+              <div class="topics-list">
+                      <span class="image-wrapper">
+                        <%= link_to(image_tag(@imgname, size: "240x300", :class => "image"), "") %>
+                      </span>
+              <b class="title"><%= topic.title %></b>
+              <time class="date" datetime="<%= topic.day %>"><%= topic.day %></time>
+              <p class="description"><%= topic.column %></p>
+              </div>
+            </div>
+        <% end %>
+      <% else %>
+        <p>コラムはありません</p>
+      <% end %>
+    </div>
+
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+
+
+
+
+
+
+  <section id="activity">
+    <p id="activitys">––––　<%= link_to(image_tag("acc.png", size: "105x105"), "") %>　––––</p>
+
+    <div id="calendar">
+      <%= javascript_tag do %>
+        window.calendar_datas = <%= raw @datas.to_json %>;
+      <% end %>
+
+      <div id="calendar"></div>
+    </div>
+    <div id="windguru"><!--ウインドグルのウィジェット置き場-->
+      <script src="http://widget.windguru.cz/js/wg_widget.php" type="text/javascript"></script>
+      <script language="JavaScript" type="text/javascript" id="wind">
+          //<![CDATA[
+          WgWidget({
+                  s: 208567, odh: 0, doh: 24, wj: 'knots', tj: 'c', waj: 'm', fhours: 72, lng: 'en',
+                  params: ['WINDSPD', 'GUST', 'SMER', 'HTSGW', 'TMPE'],
+                  first_row: true,
+                  spotname: true,
+                  first_row_minfo: true,
+                  last_row: true,
+                  lat_lon: true,
+                  tz: true,
+                  sun: true,
+                  link_archive: false,
+                  link_new_window: false
+              },
+              'wg_target_div_208567_78436648'
+          );
+          //]]>
+      </script>
+      <div id="wg_target_div_208567_78436648"></div>
+    </div>
+    <!--スケジュールiframe置き場-->
+
+  </section>
+
+
+
+  <section class="sns">
+    <p id="sns">––––　<%= link_to(image_tag("sns.jpg", size: "90x90"), "") %>　––––</p>
+
+    <div id="twitter">
+      <p><%= link_to(image_tag("twi.jpg", size: "60x60"), "") %></p>
+      <a class="twitter-timeline" data-width="300" data-height="400" data-theme="light" data-link-color="#2B7BB9" href="https://twitter.com/keiomarin?ref_src=twsrc%5Etfw">Tweets
+        by keiomarin</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <div id="facebook">
+      <p><%= link_to(image_tag("face.jpg", size: "60x60"), "") %></p>
+      <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fkeiomarine%2F&tabs=timeline&width=300&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+              width="300" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+    </div>
+    <div id="instagram">
+      <p><%= link_to(image_tag("ins.png", size: "60x60"), "") %></p>
+      <iframe src="https://snapwidget.com/embed/494649" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="yes" style="border:none; overflow:hidden; width:300px; height:400px"></iframe>
+    </div>
+
+  </section>
+
+
+  <footer id="copyright">
+    <div>【入部するには？】<br>
+
+      日吉キャンパス・SFC周辺での新歓活動（詳しくはhttps://www.facebook.com/keiomarine）にご参加ください。<br>
+      何年生でも、いつからでも入部は大歓迎！<br>
+
+      入会金は特になし、部費は年間5,000円です（新歓期は全部無料！）<br>
+      まずは、体験試乗から！<br>
+      下記アドレスにご連絡ください！<br>
+
+      　keiomarine2018@gmail.com</div>
+    <h3>All created by members.</h3><!--あとがき-->
+  </footer>
+
+</div>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        centeredSlides: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+
+    // スムーススクロールを起動する
+    $("document").ready(function () {
+        $("#theTarget").skippr();
+    });
+
+    // オプションを指定してSkipperの実行
+    $("#theTarget").skippr({
+        // スライドショーの変化 ("fade" or "slide")
+        transition: 'slide',
+        // 変化に係る時間(ミリ秒)
+        speed: 1000,
+        // easingの種類
+        easing: 'easeOutQuart',
+        // ナビゲーションの形("block" or "bubble")
+        navType: 'block',
+        // 子要素の種類("div" or "img")
+        childrenElementType: 'img',
+        // ナビゲーション矢印の表示(trueで表示)
+        arrows: true,
+        // スライドショーの自動再生(falseで自動再生なし)
+        autoPlay: false,
+        // 自動再生時のスライド切替間隔(ミリ秒)
+        autoPlayDuration: 1000,
+        // キーボードの矢印キーによるスライド送りの設定(trueで有効)
+        keyboardOnAlways: true,
+        // 一枚目のスライド表示時に戻る矢印を表示するかどうか(falseで非表示)
+        hidePrevious: false
+    });
+
+
+
+    var scrollElm = (function () {
+        if ('scrollingElement' in document) return document.scrollingElement;
+        if (navigator.userAgent.indexOf('WebKit') != -1) return document.body;
+        return document.documentElement;
+    })();
+    (function () {
+        var duration = 500;
+        var ignore = '.noscroll';
+        var easing = function (t, b, c, d) {
+            return c * (0.5 - Math.cos(t / d * Math.PI) / 2) + b;
+        }; //jswing
+        var smoothScrollElm = document.querySelectorAll('a[href^="#"]:not(' + ignore + ')');
+        Array.prototype.forEach.call(smoothScrollElm, function (elm) {
+            elm.addEventListener('click', function (e) {
+                e.preventDefault();
+                var targetElm = document.querySelector(elm.getAttribute('href'));
+                if (!targetElm) return;
+                var targetPos = targetElm.getBoundingClientRect().top;
+                var startTime = Date.now();
+                var scrollFrom = scrollElm.scrollTop;
+                (function loop() {
+                    var currentTime = Date.now() - startTime;
+                    if (currentTime < duration) {
+                        scrollTo(0, easing(currentTime, scrollFrom, targetPos, duration));
+                        window.requestAnimationFrame(loop);
+                    } else {
+                        scrollTo(0, targetPos + scrollFrom);
+                    }
+                })();
+            })
+        });
+    })();
+
+    $(document).ready(function(){
+
+        var main = $('main');
+        var nav = $('#menu1');
+        var navOffset = nav.offset();
+        var fixedClass = 'fixed';
+
+        $(window).on('load scroll',function(){
+            if ($(window).scrollTop() > navOffset.top ) {
+                $(main).css('margin-top','80px');
+                nav.addClass(fixedClass);
+            } else {
+                $(main).css('margin-top','10');
+                nav.removeClass(fixedClass);
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+
+            eventSources: [
+                {
+                    // THIS KEY WON'T WORK IN PRODUCTION!!!
+                    // To make your own Google API key, follow the directions here:
+                    // http://fullcalendar.io/docs/google_calendar/
+                    googleCalendarApiKey: 'AIzaSyDUpj6c-ngDmFJRha__JiVByw1SsUAmbXI',
+
+                    // JP Holidays
+                    url: 'ekcq9ed8nqvsijti01k1tictlo@group.calendar.google.com',
+                    color: 'navy',   // an option!
+                    textColor: 'white',
+                    borderColor: 'black',
+
+
+
+                },
+                {
+                    // THIS KEY WON'T WORK IN PRODUCTION!!!
+                    // To make your own Google API key, follow the directions here:
+                    // http://fullcalendar.io/docs/google_calendar/
+                    googleCalendarApiKey: 'AIzaSyDUpj6c-ngDmFJRha__JiVByw1SsUAmbXI',
+
+                    // JP Holidays
+                    url: 'ja.japanese#holiday@group.v.calendar.google.com',
+                    color: 'red',   // an option!
+                    textColor: 'white'
+                }
+            ],
+
+
+            header: {
+                left: 'prev,next today myCustomButton',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth',
+                eventListButton: {
+                    text: 'イベントリスト',
+                    click: function () {
+                        alert('イベントリスト!');
+                    }
+                }
+            },
+
+        });
+    });
+</script>
+
+
+
+
+
+</body>
+</html>
